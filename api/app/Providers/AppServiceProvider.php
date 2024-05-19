@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
-
-use function Ramsey\Uuid\v1;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        /**
+         * Remove Data Wrapping in API Resource.
+         */
+        JsonResource::withoutWrapping();
+        
         /**
          * Passport Configuration.
          */
