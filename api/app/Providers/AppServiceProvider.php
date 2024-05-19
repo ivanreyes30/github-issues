@@ -29,13 +29,9 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Passport Configuration.
          */
-        Passport::tokensExpireIn(now()->addMinutes(60 * 2));
-        Passport::refreshTokensExpireIn(now()->addMinutes(60 * 4));
-
-        /**
-         * Passport Configuration For Testing.
-         */
-        // Passport::tokensExpireIn(now()->addSeconds(10));
-        // Passport::refreshTokensExpireIn(now()->addSeconds(60));
+        $accessTokenExpiration = config('auth.access_token_expiration');
+        $refreshTokenExpiration = config('auth.refresh_token_expiration');
+        Passport::tokensExpireIn(now()->addMinutes($accessTokenExpiration));
+        Passport::refreshTokensExpireIn(now()->addMinutes($refreshTokenExpiration));
     }
 }

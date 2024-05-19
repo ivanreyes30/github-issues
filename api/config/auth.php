@@ -129,4 +129,10 @@ return [
     'access_token_expiration' => env('AUTH_ACCESS_TOKEN_EXP', 60 * 2),
     'refresh_token_expiration' => env('AUTH_REFRESH_TOKEN_EXP', 60 * 4),
 
+    /**
+     * Passport Configuration For Testing.
+     */
+    // 'access_token_expiration' => env('AUTH_ACCESS_TOKEN_EXP', 0.2),
+    // 'refresh_token_expiration' => env('AUTH_REFRESH_TOKEN_EXP', 0.2),
+
 ];

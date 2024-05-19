@@ -4,22 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\TokenRequest;
-use App\Services\AuthService;
+use App\Services\{
+    AuthService,
+    GithubService,
+};
 
 class AuthController extends Controller
 {
-    public function __construct(AuthService $service)
-    {
+    protected $githubService;
+
+    public function __construct(
+        AuthService $service,
+        GithubService $githubService
+    ) {
         $this->service = $service;
+        $this->githubService = $githubService;
     }
 
-    public function verifyClientCredentials(Request $request)
+    public function verifyClientCredentials()
     {
         /**
          * Client Credentials already verified in middleware.
-         * If the token valid, return the request token.
+         * If the token valid, return the github user info.
          */
-        return response()->json(['_token' => $request->cookie('_token')]);
+        return $this->githubService->getUserInfo();
     }
 
     public function clientCredentials(TokenRequest $request)
