@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 use Illuminate\Http\Client\Response;
-use Illuminate\Auth\AuthenticationException;
 
 class CurlResponseHelper
 {
@@ -11,7 +10,7 @@ class CurlResponseHelper
     {
         switch ($response->status()) {
             case 200:
-                return true;
+                return json_decode($response->body(), true);;
                 break;
             default:
                 abort($response->status(), $response->body());
