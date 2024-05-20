@@ -1,7 +1,5 @@
 import AuthApi from '@/api/auth'
-import ErrorHandler from '@/helpers/error-handler'
 import logger from '@/helpers/logger'
-import router from '@/router/index'
 import { useCookies } from 'vue3-cookies'
 import { useAuthStore } from '@/stores/auth'
 
