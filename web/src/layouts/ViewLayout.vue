@@ -3,24 +3,24 @@ import { computed } from 'vue'
 import { RouterView } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useCoreStore } from '@/stores/core'
-import { useRouter } from 'vue-router'
-import PageLoader from '@/components/PageLoader.vue'
+import NavBar from '@/components/NavBar.vue'
+import BreadcrumbList from '@/components/BreadcrumbList.vue'
 
 const authStore = useAuthStore()
 const coreStore = useCoreStore()
-const router = useRouter()
 
 const isLoading = computed(() => {
-  if (router.currentRoute.value.name === 'ErrorView') return false
   return authStore.loading || coreStore.loading
 })
-
+console.log(isLoading.value)
 </script>
 
 <template>
   <NavBar/>
-  <PageLoader v-if="isLoading"/>
-  <RouterView />
+  <div class="container pt-4">
+    <BreadcrumbList/>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>

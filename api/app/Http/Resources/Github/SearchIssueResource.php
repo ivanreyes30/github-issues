@@ -19,6 +19,7 @@ class SearchIssueResource extends JsonResource
         $data = parent::toArray($request);
         $query = Arr::query(['repository' => Arr::get($data, 'repository.name'), 'owner' => Arr::get($data, 'repository.owner.login')]);
         $number = Arr::get($data, 'number');
+        $created = Carbon::parse(Arr::get($data, 'created_at'))->diffForHumans();
 
         return [
             'id' => Arr::get($data, 'id'),
@@ -53,6 +54,7 @@ class SearchIssueResource extends JsonResource
                 ];
             })->toArray(),
             'created_at' => Carbon::parse(Arr::get($data, 'created_at'))->diffForHumans(),
+            'details_text' => "#{$number} - created {$created}",
         ];
     }
 }

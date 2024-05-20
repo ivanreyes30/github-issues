@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Helpers\CurlResponseHelper;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
 class AuthRepository extends Repository
@@ -21,6 +22,9 @@ class AuthRepository extends Repository
 
         $http = Http::asForm()->post($this->route, $request);
 
-        return CurlResponseHelper::handler($http);
+        $token = CurlResponseHelper::handler($http);
+        Arr::set($token, 'expire_date', now()->addSeconds($token['expires_in'] - 60)->format('Y-m-d H:i:s'));
+
+        return $token;
     }
 }

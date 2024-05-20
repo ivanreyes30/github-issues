@@ -38,4 +38,12 @@ class GithubService extends Service
 
         return new FindIssueResource($item);
     }
+
+    public function getUserInfo()
+    {
+        $response = $this->http->get("{$this->baseUrl}/user");
+        $item = CurlResponseHelper::handler($response);
+
+        return response()->json($item);
+    }
 }

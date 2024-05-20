@@ -17,7 +17,7 @@ Route::prefix('auth')->group(function () {
 
     Route::middleware('verify-client-grant-credentials')->group(function () {
         Route::prefix('verify')->group(function () {
-            Route::post('client-credentials', [AuthController::class, 'verifyClientCredentials']);
+            Route::get('client-credentials', [AuthController::class, 'verifyClientCredentials']);
         });
     });
 
