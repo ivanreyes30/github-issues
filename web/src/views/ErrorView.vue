@@ -1,21 +1,55 @@
+<script setup>
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
+
+const display = computed(() => {
+  switch (route?.query?.status) {
+    case '401': {
+      return {
+        code: 401,
+        title: 'Unauthorized Access',
+        message: 'You do not have permission to view this page.'
+      }
+    }
+    default: {
+      return {
+        code: 404,
+        title: 'Page Not Found',
+        message: 'Sorry, the page you are looking for does not exist.'
+      }
+    }
+  }
+})
+
+</script>
+
 <template>
   <div class="error-container">
     <div class="error-content">
-      <div class="error-code">401</div>
-      <div class="error-message">Unauthorized Access</div>
-      <p>You do not have permission to view this page.</p>
+      <div class="error-code">
+        {{ display.code }}
+      </div>
+      <div class="error-message">
+        {{ display.title }}
+      </div>
+      <p>
+        {{ display.message }}
+      </p>
+      <button
+        type="button"
+        class="btn btn-danger btn-lg mt-4"
+        @click="router.push('/')"
+      >
+        Go Back
+      </button>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background-color: #f8f9fa;
-} */
 
 .error-container {
   text-align: center;

@@ -7,6 +7,6 @@ export default {
 
     if (await AuthService.setAuth()) return next()
 
-    return next('/error-page')
+    return next('/error?status=401')
   }
 }
