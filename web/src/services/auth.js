@@ -9,29 +9,36 @@ export default {
   cookie: useCookies().cookies,
 
   auth () {
-    // const credentials = this.cookie.get('auth')
-    // if (!credentials) return null
-    // return credentials
     return this.cookie.get('auth')
   },
 
   async setAuth () {
-    try {
-      const { data } = await AuthApi.getClientCredentialToken()
-      const authStore = useAuthStore()
-      const auth = await authStore.getAuth()
-      // console.log(auth)
-      this.setAuthCookie(auth, data.expires_in)
-      return true
+      try {
+        const { data } = await AuthApi.getClientCredentialToken()
+        const authStore = useAuthStore()
+        const auth = await authStore.getAuth()
+        this.setAuthCookie(auth, data.expires_in)
+        return true
     } catch (error) {
-      console.log('qweqwe')
       logger.error(error)
       return false
     }
   },
 
+  async verify () {
+    try {
+      await AuthApi.verifyClientCredentialToken()
+      const authStore = useAuthStore()
+      await authStore.getAuth()
+      return true
+    } catch (error) {
+      logger.error(error)
+      return false
+    }
+  },
+ 
   setAuthCookie (auth, expires) {
     const token = JSON.stringify(auth)
-    this.cookie.set('auth', token, expires, '/', import.meta.env.VITE_APP_DOMAIN)
+    this.cookie.set('auth', token, (expires - 60), '/', import.meta.env.VITE_APP_DOMAIN)
   }
 } 
