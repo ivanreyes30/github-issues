@@ -1,5 +1,6 @@
 import AuthApi from '@/api/auth'
 import logger from '@/helpers/logger'
+import WebConfig from '@/config/web'
 import { useCookies } from 'vue3-cookies'
 import { useAuthStore } from '@/stores/auth'
 
@@ -37,6 +38,6 @@ export default {
  
   setAuthCookie (auth, expires) {
     const token = JSON.stringify(auth)
-    this.cookie.set('auth', token, (expires - 60), '/', import.meta.env.VITE_APP_DOMAIN)
+    this.cookie.set('auth', token, (expires - 60), '/', WebConfig.DOMAIN)
   }
 } 

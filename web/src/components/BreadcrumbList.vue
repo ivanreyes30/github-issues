@@ -20,6 +20,8 @@ const coreStore = useCoreStore()
         <RouterLink :to="item.link">
           {{ item.title }}
         </RouterLink>
+
+        <!-- <RouterLink to="/about">test</RouterLink> -->
       </li>
       <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
       <li class="breadcrumb-item"><a href="#">Library</a></li>

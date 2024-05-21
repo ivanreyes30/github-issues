@@ -1,5 +1,6 @@
 import axios from 'axios'
 import logger from '@/helpers/logger'
+import ApiConfig from '@/config/api'
 
 export default {
   config: {

@@ -20,15 +20,15 @@ class SearchIssueResource extends JsonResource
         $query = Arr::query(['repository' => Arr::get($data, 'repository.name'), 'owner' => Arr::get($data, 'repository.owner.login')]);
         $number = Arr::get($data, 'number');
         $created = Carbon::parse(Arr::get($data, 'created_at'))->diffForHumans();
-
+        $timestamp = Carbon::parse(Arr::get($data, 'updated_at'))->format('F, d, ');
         return [
             'id' => Arr::get($data, 'id'),
             'number' => $number,
-            'url' => Arr::get($data, 'url'),
-            'repository_url' => Arr::get($data, 'repository_url'),
-            'detail_url' => sprintf('%s/%s', config('app.url'), "github/issue/{$number}?{$query}"),
-            'comments_url' => Arr::get($data, 'comments_url'),
-            'events_url' => Arr::get($data, 'events_url'),
+            // 'url' => Arr::get($data, 'url'),
+            // 'repository_url' => Arr::get($data, 'repository_url'),
+            'details_url' => sprintf('%s/%s', config('app.url'), "github/issue/{$number}/details?{$query}"),
+            'comments_url' => sprintf('%s/%s', config('app.url'), "github/issue/{$number}/comments?{$query}"),
+            // 'events_url' => Arr::get($data, 'events_url'),
             'title' => Arr::get($data, 'title'),
             'comments' => Arr::get($data, 'comments'),
             'assignee' => [
@@ -53,8 +53,9 @@ class SearchIssueResource extends JsonResource
                     'description' => Arr::get($label, 'description'),
                 ];
             })->toArray(),
-            'created_at' => Carbon::parse(Arr::get($data, 'created_at'))->diffForHumans(),
-            'details_text' => "#{$number} - created {$created}",
+            'details_text' => "#{$number} -  created {$created}",
+            'created_at' => Carbon::parse(Arr::get($data, 'created_at'))->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::parse(Arr::get($data, 'updated_at'))->format('Y-m-d H:i:s'),
         ];
     }
 }

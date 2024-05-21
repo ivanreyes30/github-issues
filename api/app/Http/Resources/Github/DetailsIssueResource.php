@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FindIssueResource extends JsonResource
+class DetailsIssueResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,10 +22,10 @@ class FindIssueResource extends JsonResource
         return [
             'id' => Arr::get($data, 'id'),
             'number' => $number,
-            'url' => Arr::get($data, 'url'),
-            'repository_url' => Arr::get($data, 'repository_url'),
-            'comments_url' => Arr::get($data, 'comments_url'),
-            'events_url' => Arr::get($data, 'events_url'),
+            // 'url' => Arr::get($data, 'url'),
+            // 'repository_url' => Arr::get($data, 'repository_url'),
+            // 'comments_url' => Arr::get($data, 'comments_url'),
+            // 'events_url' => Arr::get($data, 'events_url'),
             'title' => Arr::get($data, 'title'),
             'comments' => Arr::get($data, 'comments'),
             'assignee' => [
@@ -46,7 +46,9 @@ class FindIssueResource extends JsonResource
                     'description' => Arr::get($label, 'description'),
                 ];
             })->toArray(),
-            'created_at' => Carbon::parse(Arr::get($data, 'created_at'))->diffForHumans(),
+            // 'created_at' => Carbon::parse(Arr::get($data, 'created_at'))->diffForHumans(),
+            'created_at' => Carbon::parse(Arr::get($data, 'created_at'))->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::parse(Arr::get($data, 'updated_at'))->format('Y-m-d H:i:s'),
         ];
     }
 }

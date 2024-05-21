@@ -22,7 +22,6 @@ const getIssues = async () => {
 
 onMounted(async () => {
   await getIssues()
-  console.log(state)
 })
 
 </script>
