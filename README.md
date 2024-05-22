@@ -33,9 +33,13 @@ Application for Displaying Assigned GitHub Issues
 
 8. Ensure to copy the `client_id` and `client_secret` values to the `.env` file located in the `web` folder to authenticate both the API and Web App.
 
-9. If you encounter issues related to file permissions within the Docker container, you can resolve them by running the command `chmod 777 -R {filepath or directory}`.
+9. Place your GitHub personal token into the GITHUB_PERSONAL_TOKEN variable.
 
-10. I've included a Postman collection for your reference. You can import it into your Postman application.
+10. Occasionally, changes made to values in .env variables might not take effect immediately. Run php artisan config:cache to ensure the changes are applied.
+
+11. If you encounter issues related to file permissions within the Docker container, you can resolve them by running the command `chmod 777 -R {filepath or directory}`.
+
+12. I've included a Postman collection for your reference. You can import it into your Postman application.
 
 
 # Web Installation (in the 'web' folder)
