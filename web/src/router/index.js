@@ -34,13 +34,7 @@ const router = createRouter({
           name: 'IssueDetailsView',
           component: () => import('../views/IssueDetailsView.vue'),
           beforeEnter: (to, from, next) => (GuardService.authorized(to, from, next)),
-        },
-        {
-          path: '/about',
-          name: 'about',
-          component: () => import('../views/AboutView.vue')
         }
-        
       ]
     }
   ]

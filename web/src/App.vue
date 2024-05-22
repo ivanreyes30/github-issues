@@ -18,9 +18,10 @@ const isLoading = computed(() => {
 </script>
 
 <template>
-  <PageLoader v-if="isLoading"/>
-  <NavBar/>
-  <RouterView />
+  <div>
+    <PageLoader v-if="isLoading"/>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>

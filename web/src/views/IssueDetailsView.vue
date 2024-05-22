@@ -29,10 +29,6 @@ const getComments = async () => {
   return await DefaultApi.get(url)
 }
 
-onBeforeUnmount(() => {
-  coreStore.resetBreadcrumbs()
-})
-
 onMounted(async () => {
   try {
     coreStore.setLoading(true)
@@ -46,7 +42,11 @@ onMounted(async () => {
   } finally {
     coreStore.setLoading(false)
   }
-}) 
+})
+
+onBeforeUnmount(() => {
+  coreStore.resetBreadcrumbs()
+})
 </script>
 
 <template>

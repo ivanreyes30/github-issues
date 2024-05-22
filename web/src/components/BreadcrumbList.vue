@@ -3,8 +3,6 @@ import { useCoreStore } from '@/stores/core'
 import { RouterLink } from 'vue-router'
 
 const coreStore = useCoreStore()
-
-// console.log(coreStore.links)
 </script>
 
 <template>
@@ -22,12 +20,7 @@ const coreStore = useCoreStore()
         >
           {{ item.title }}
         </RouterLink>
-
-        <!-- <RouterLink to="/about">test</RouterLink> -->
       </li>
-      <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li> -->
     </ol>
   </nav>
 </template>

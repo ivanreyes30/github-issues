@@ -1,5 +1,4 @@
 import axios from 'axios'
-import logger from '@/helpers/logger'
 import ApiConfig from '@/config/api'
 
 export default {
@@ -18,28 +17,33 @@ export default {
 
     return instance
   },
+  
+  /**
+   * This code is for API retry when the token expires
+   * Planning to create a queue request API for further enhancement.
+   * 
+   * const url = config.url
+   * const method = config.method
+   * const params = config.params
+   * return axios.create(config)[method](url, { params })
+  */
 
-  async setAuth () {
-    this.http()
-      .post(`auth/token/client-credentials`, {
-        client_id: ApiConfig.CLIENT_ID,
-        client_secret: ApiConfig.CLIENT_SECRET
-      })
-      .then(() => {
-        /**
-         * This code is for API retry when the token expires
-         * Planning to create a queue request API for further enhancement.
-         * 
-         * const url = config.url
-         * const method = config.method
-         * const params = config.params
-         * return axios.create(config)[method](url, { params })
-        */
-        location.reload()
-        return true
-      })
-      .catch((error) => {
-        logger.error(error)
-      })
-  },
+  /**
+   * This code is not used anymore
+   * Commented it just for reference
+    async setAuth () {
+      this.http()
+        .post(`auth/token/client-credentials`, {
+          client_id: ApiConfig.CLIENT_ID,
+          client_secret: ApiConfig.CLIENT_SECRET
+        })
+        .then(() => {
+          location.reload()
+          return true
+        })
+        .catch((error) => {
+          logger.error(error)
+        })
+    }
+  */
 }

@@ -12,27 +12,19 @@ export default {
   },
 
   async setAuth () {
-      try {
-        const { data } = await AuthApi.getClientCredentialToken()
-        const authStore = useAuthStore()
-        const auth = await authStore.getAuth()
-        this.setAuthCookie(auth, data.expires_in)
-        return true
-    } catch (error) {
-      logger.error(error)
-      return false
-    }
-  },
+    const authStore = useAuthStore()
 
-  async verify () {
     try {
-      await AuthApi.verifyClientCredentialToken()
-      const authStore = useAuthStore()
-      await authStore.getAuth()
+      authStore.setLoading(true)
+      const { data } = await AuthApi.getClientCredentialToken()
+      const auth = await authStore.getAuth()
+      this.setAuthCookie(auth, data.expires_in)
       return true
     } catch (error) {
       logger.error(error)
       return false
+    } finally {
+      authStore.setLoading(false)
     }
   },
  

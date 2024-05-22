@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import ListLoader from '@/components/common/ListLoader.vue'
 import CardList from '@/components/issues/CardList.vue'
 
 const emit = defineEmits(['selectIssue'])
@@ -9,13 +10,7 @@ const props = defineProps({
 })
 
 const isEmpty = computed(() => (props.issues.length === 0))
-
 const totalIssues = computed(() => (props.issues.length))
-
-const display = computed(() => {
-  if (props.loading) return 'Loading...'
-  return 'No issues found.'
-})
 
 </script>
 
@@ -41,27 +36,12 @@ const display = computed(() => {
       </div>
     </div>
     <div class="git-card__body">
-      <!-- <p class="placeholder-glow">
-        <span class="placeholder col-12"></span>
-      </p>
-      <p class="placeholder-glow">
-        <span class="placeholder col-12"></span>
-      </p>
-      <p class="placeholder-glow">
-        <span class="placeholder col-12"></span>
-      </p>
-      <p class="placeholder-glow">
-        <span class="placeholder col-12"></span>
-      </p> -->
-      <!-- v-else -->
+      <ListLoader :loading="props.loading"/>
       <div
-        v-if="isEmpty"
+        v-if="isEmpty && !loading"
         class="git-card__body__empty"
       >
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        {{ display }}
+        No issues found.
       </div>
       <CardList
         v-for="(item, index) in props.issues"
