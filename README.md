@@ -33,7 +33,7 @@ Application for Displaying Assigned GitHub Issues
 
 8. Ensure to copy the `client_id` and `client_secret` values to the `.env` file located in the `web` folder to authenticate both the API and Web App.
 
-9. Place your GitHub personal token into the GITHUB_PERSONAL_TOKEN variable.
+9. Place your GitHub personal token into the `GITHUB_PERSONAL_TOKEN` variable.
 
 10. Occasionally, changes made to values in .env variables might not take effect immediately. Run php artisan config:cache to ensure the changes are applied.
 
