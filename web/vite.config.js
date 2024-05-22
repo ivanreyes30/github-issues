@@ -9,19 +9,7 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   server: {
     host: 'web.git.dev.com',
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://api.git.dev.com/',
-    //     // target: import.meta.env.VITE_API_URL,
-    //     changeOrigin: true,
-    //     rewrite: (path) => path.replace(/^\/api/, ''),
-    //   }
-    //   // '^/api/.*': {
-    //   //   target: 'http://api.git.dev.com/',
-    //   //   changeOrigin: true,
-    //   //   rewrite: (path) => path.replace(/^\/api/, ''),
-    //   // },
-    // }
+    port: 5173
   },
   plugins: [
     vue(),

@@ -18,14 +18,6 @@ return Application::configure(basePath: dirname(__DIR__))
             \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
         ]);
 
-        // $middleware->api(prepend: [
-        //     \App\Http\Middleware\InjectTokenFromCookieMiddleware::class,
-        //     \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
-        // ]);
-
-        // $middleware->alias([
-        //     'verify.client-grant-credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
-        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

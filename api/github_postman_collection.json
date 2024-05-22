@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "b3d4476f-db0d-4991-835d-53225deb904e",
+		"name": "Github",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20361530"
+	},
+	"item": [
+		{
+			"name": "Client Credentials Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Referrer",
+						"value": "http://web.git.dev.com:8080"
+					},
+					{
+						"key": "Origin",
+						"value": "http://web.git.dev.com:8080"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client_id\": 3,\r\n    \"client_secret\": \"lZBp4FusHS3McgH9aeUEN01wPVqtSo6bhybjA892\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL_API}}/auth/token/client-credentials",
+					"host": [
+						"{{BASEURL_API}}"
+					],
+					"path": [
+						"auth",
+						"token",
+						"client-credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Client Credentials",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Referrer",
+						"value": "http://web.git.dev.com:8080"
+					},
+					{
+						"key": "Origin",
+						"value": "http://web.git.dev.com:8080"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL_API}}/auth/verify/client-credentials",
+					"host": [
+						"{{BASEURL_API}}"
+					],
+					"path": [
+						"auth",
+						"verify",
+						"client-credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Github Issues",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Referrer",
+						"value": "http://web.git.dev.com:8080"
+					},
+					{
+						"key": "Origin",
+						"value": "http://web.git.dev.com:8080"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL_API}}/github/issue/search",
+					"host": [
+						"{{BASEURL_API}}"
+					],
+					"path": [
+						"github",
+						"issue",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detail Issues",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Referrer",
+						"value": "http://web.git.dev.com:8080"
+					},
+					{
+						"key": "Origin",
+						"value": "http://web.git.dev.com:8080"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL_API}}/github/issue/2/details?repository=cv-portfolio&owner=ivanreyes30",
+					"host": [
+						"{{BASEURL_API}}"
+					],
+					"path": [
+						"github",
+						"issue",
+						"2",
+						"details"
+					],
+					"query": [
+						{
+							"key": "repository",
+							"value": "cv-portfolio"
+						},
+						{
+							"key": "owner",
+							"value": "ivanreyes30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments Issue",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Referrer",
+						"value": "http://web.git.dev.com:8080"
+					},
+					{
+						"key": "Origin",
+						"value": "http://web.git.dev.com:8080"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL_API}}/github/issue/2/comments?repository=cv-portfolio&owner=ivanreyes30",
+					"host": [
+						"{{BASEURL_API}}"
+					],
+					"path": [
+						"github",
+						"issue",
+						"2",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "repository",
+							"value": "cv-portfolio"
+						},
+						{
+							"key": "owner",
+							"value": "ivanreyes30"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASEURL",
+			"value": "http://localhost",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "BASEURL_API",
+			"value": "http://localhost/api",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "BASEURL_API",
+			"value": "http://api.git.dev.com/api",
+			"type": "string"
+		},
+		{
+			"key": "BASEURL",
+			"value": "http://api.git.dev.com",
+			"type": "string"
+		}
+	]
+}
