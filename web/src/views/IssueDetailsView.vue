@@ -10,6 +10,7 @@ import CardPrimary from "@/components/common/CardPrimary.vue"
 const coreStore = useCoreStore()
 const issueStore = useIssueStore()
 const router = useRouter()
+
 let state = reactive({
   details: {},
   comments: []
@@ -31,6 +32,11 @@ const getComments = async () => {
 
 onMounted(async () => {
   try {
+    if (issueStore.selected === null) {
+      router.push('/error?status=404')
+      return
+    }
+
     coreStore.setLoading(true)
     const [detailsPr, commentsPr] = await Promise.all([getDetails(), getComments()])
     state.details = detailsPr.data
