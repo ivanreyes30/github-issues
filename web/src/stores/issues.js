@@ -23,8 +23,8 @@ export const useIssueStore = defineStore('issues', {
       })
     },
 
-    setSelected (number) {
-      const issue = this.issues.find((value) => (value.number === number))
+    setSelected (id) {
+      const issue = this.issues.find((value) => (value.id === id))
       this.selected = issue
     }
   }

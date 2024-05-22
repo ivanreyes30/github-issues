@@ -13,9 +13,9 @@ const displayList = computed(() => {
   return issueStore.issues
 })
 
-const selectIssue = (number) => {
-  issueStore.setSelected(number)
-  return router.push(`/issue/${number}`)
+const selectIssue = (id) => {
+  issueStore.setSelected(id)
+  return router.push(`/issue/${id}`)
 }
 
 const getIssues = async () => {

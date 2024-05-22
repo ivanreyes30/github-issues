@@ -20,6 +20,11 @@ const isEmptyComments = computed(() => {
   return state.comments.length === 0
 })
 
+const repositoryName = computed(() => {
+  if (issueStore.selected === null) return ''
+  return issueStore.selected.repository.name
+})
+
 const getDetails = async () => {
   const url = issueStore.selected.details_url
   return await DefaultApi.get(url)
@@ -84,7 +89,8 @@ onBeforeUnmount(() => {
           <span>
             {{ state.details.specific_details_text }}
           </span>
-          <span class="float-end mt-2">
+          <span class="float-end text-end">
+            {{ repositoryName }} <br/>
             {{ state.details.timestamp }}
           </span>
         </span>

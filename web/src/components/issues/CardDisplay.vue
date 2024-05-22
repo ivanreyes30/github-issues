@@ -47,7 +47,7 @@ const totalIssues = computed(() => (props.issues.length))
         v-for="(item, index) in props.issues"
         :item="item"
         :key="`issue-${index}`"
-        @selectIssue="(number) => emit('selectIssue', number)"
+        @selectIssue="(id) => emit('selectIssue', id)"
       />
     </div>
   </div>

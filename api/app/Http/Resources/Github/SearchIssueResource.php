@@ -46,7 +46,7 @@ class SearchIssueResource extends JsonResource
                     'description' => Arr::get($label, 'description'),
                 ];
             })->toArray(),
-            'details_text' => "#{$number} - created {$createdDiff}, $timestamp",
+            'details_text' => "created {$createdDiff}, $timestamp",
             'created_at' => Carbon::parse(Arr::get($data, 'created_at'))->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse(Arr::get($data, 'updated_at'))->format('Y-m-d H:i:s'),
         ];

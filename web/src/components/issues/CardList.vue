@@ -10,7 +10,7 @@ const item = props.item
 const { labels } = item
 
 const redirectToDetails = () => {
-  emit('selectIssue', item.number)
+  emit('selectIssue', item.id)
 }
 </script>
 
@@ -24,7 +24,7 @@ const redirectToDetails = () => {
         </svg>
         <span
           class="git-card__body-list__left__title__text"
-          @click="emit('selectIssue', item.number)"
+          @click="redirectToDetails"
         >
           {{ item.title }}
         </span>
@@ -35,7 +35,10 @@ const redirectToDetails = () => {
           :color="label.color"
         />
         <div class="git-card__body-list__left__title__details">
-          {{ item.details_text }}
+          <span>
+            #{{ item.number }} {{ item.repository.name }} <br>
+            {{ item.details_text }} <br>
+          </span>
         </div>
       </div>
     </div>
