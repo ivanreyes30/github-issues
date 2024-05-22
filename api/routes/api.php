@@ -28,7 +28,8 @@ Route::middleware('verify-client-grant-credentials')->group(function () {
     Route::prefix('github')->group(function () {
         Route::prefix('issue')->group(function () {
             Route::get('search', [GithubController::class, 'searchIssues']);
-            Route::get('{id}', [GithubController::class, 'findIssue']);
+            Route::get('{id}/details', [GithubController::class, 'detailsIssue']);
+            Route::get('{id}/comments', [GithubController::class, 'commentsIssue']);
         });
     });
 });

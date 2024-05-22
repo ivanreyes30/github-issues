@@ -21,18 +21,19 @@ const router = createRouter({
       path: '/',
       name: 'ViewLayout',
       component: () => import('../layouts/ViewLayout.vue'),
-      redirect: '/',
+      redirect: '/issue',
       children: [
         {
-          path: '/',
+          path: '/issue',
           name: 'IssueView',
           component: () => import('../views/IssueView.vue'),
-          beforeEnter: (to, from, next) => (GuardService.authorized(to, from, next))
+          beforeEnter: (to, from, next) => (GuardService.authorized(to, from, next)),
         },
         {
-          path: '/about',
-          name: 'about',
-          component: () => import('../views/AboutView.vue')
+          path: '/issue/:id',
+          name: 'IssueDetailsView',
+          component: () => import('../views/IssueDetailsView.vue'),
+          beforeEnter: (to, from, next) => (GuardService.authorized(to, from, next)),
         }
       ]
     }

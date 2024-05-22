@@ -1,4 +1,7 @@
 <script setup>
+import BadgeLabel from '@/components/common/BadgeLabel.vue'
+
+const emit = defineEmits(['selectIssue'])
 const props = defineProps({
   item: Object
 })
@@ -6,8 +9,8 @@ const props = defineProps({
 const item = props.item
 const { labels } = item
 
-const commentOnclick = () => {
-  // window.open(comments_url, '_blank')
+const redirectToDetails = () => {
+  emit('selectIssue', item.number)
 }
 </script>
 
@@ -19,17 +22,18 @@ const commentOnclick = () => {
           <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
           <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path>
         </svg>
-        <span class="git-card__body-list__left__title__text">
+        <span
+          class="git-card__body-list__left__title__text"
+          @click="emit('selectIssue', item.number)"
+        >
           {{ item.title }}
         </span>
-        <span
+        <BadgeLabel
           v-for="(label, index) in labels"
           :key="`label-${index}`"
-          class="git-card__body-list__left__title__badge"
-          :style="{'background': `#${label.color}`}"
-        >
-          {{ label.name }}
-        </span>
+          :name="label.name"
+          :color="label.color"
+        />
         <div class="git-card__body-list__left__title__details">
           {{ item.details_text }}
         </div>
@@ -39,19 +43,22 @@ const commentOnclick = () => {
       <a class="git-card__body-list__right__avatar">
         <img
           class="git-card__body-list__right__avatar_img"
-          src="https://avatars.githubusercontent.com/u/66289020?s=40&v=4"
+          :src="item.assignee.avatar_url"
           width="20"
           height="20"
         />
       </a>
       <a
         class="git-card__body-list__right__comments"
-        @click="commentOnclick"
+        v-if="item.comments !== 0"
+        @click="redirectToDetails"
       >
         <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-comment v-align-middle">
           <path d="M1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 13.25 12H9.06l-2.573 2.573A1.458 1.458 0 0 1 4 13.543V12H2.75A1.75 1.75 0 0 1 1 10.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h4.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
         </svg>
-        <span class="git-card__body-list__right__comments__number">
+        <span
+          class="git-card__body-list__right__comments__number"
+        >
           {{ item.comments }}
         </span>
       </a>
@@ -83,6 +90,7 @@ const commentOnclick = () => {
   font-size: 12px;
   color: #636c76;
   padding-left: 15px;
+  margin-top: 2px;
 }
 
 .git-card__body-list__left__title__badge {

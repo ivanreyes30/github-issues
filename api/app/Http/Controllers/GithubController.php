@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Services\GithubService;
 use App\Http\Requests\Github\{
     SearchIssueRequest,
-    FindIssueRequest,
+    DetailsIssueRequest,
+    CommentsIssueRequest,
 };
 
 class GithubController extends Controller
@@ -22,10 +23,17 @@ class GithubController extends Controller
         return $this->service->getIssues($request);
     }
 
-    public function findIssue(FindIssueRequest $request)
+    public function detailsIssue(DetailsIssueRequest $request)
     {
         $request = $request->validated();
 
-        return $this->service->findIssue($request);
+        return $this->service->detailsIssue($request);
+    }
+
+    public function commentsIssue(CommentsIssueRequest $request)
+    {
+        $request = $request->validated();
+
+        return $this->service->commentsIssue($request);
     }
 }

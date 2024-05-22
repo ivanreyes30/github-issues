@@ -1,36 +1,40 @@
 <script setup>
-import { reactive, onMounted, ref } from 'vue'
 import IssueCardDisplay from '@/components/issues/CardDisplay.vue'
-import githubApi from '@/api/github'
-import logger from '@/helpers/logger'
+import { computed, onMounted, ref } from 'vue'
+import { useIssueStore } from '@/stores/issues'
+import { useRouter } from 'vue-router'
 
-let state = reactive({ items: [] })
 let loading = ref(false)
+const issueStore = useIssueStore()
+const router = useRouter()
+
+const displayList = computed(() => {
+  if (loading.value) return []
+  return issueStore.issues
+})
+
+const selectIssue = (number) => {
+  issueStore.setSelected(number)
+  return router.push(`/issue/${number}`)
+}
 
 const getIssues = async () => {
   loading.value = true
-  try {
-    const { data } = await githubApi.searchIssues({})
-    state.items = data
-  } catch (error) {
-    logger.error(error)
-    return false
-  } finally {
-    loading.value = false
-  }
+  await issueStore.getIssues()
+  loading.value = false
 }
 
 onMounted(async () => {
   await getIssues()
-  console.log(state)
 })
 
 </script>
 
 <template>
   <IssueCardDisplay
-    :issues="state.items"
+    :issues="displayList"
     :loading="loading"
+    @selectIssue="selectIssue"
   />
 </template>
 

@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Arr;
 use App\Http\Resources\Github\{
     SearchIssueResource,
-    FindIssueResource,
+    DetailsIssueResource,
+    CommentsIssueResource,
 };
 
 class GithubService extends Service
@@ -30,13 +31,22 @@ class GithubService extends Service
         return SearchIssueResource::collection($items);
     }
 
-    public function findIssue(array $request)
+    public function detailsIssue(array $request)
     {
         $id = Arr::get($request, 'id');
         $response = $this->http->get("{$this->baseUrl}/repos/{$request['owner']}/{$request['repository']}/issues/{$id}");
         $item = CurlResponseHelper::handler($response);
 
-        return new FindIssueResource($item);
+        return new DetailsIssueResource($item);
+    }
+
+    public function commentsIssue(array $request)
+    {
+        $id = Arr::get($request, 'id');
+        $response = $this->http->get("{$this->baseUrl}/repos/{$request['owner']}/{$request['repository']}/issues/{$id}/comments");
+        $item = CurlResponseHelper::handler($response);
+
+        return CommentsIssueResource::collection($item);
     }
 
     public function getUserInfo()
