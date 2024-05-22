@@ -1,14 +1,61 @@
 <script setup>
+import { computed, reactive, onMounted, onBeforeUnmount } from 'vue'
+import { useRouter } from 'vue-router'
+import { useCoreStore } from '@/stores/core'
+import { useIssueStore } from '@/stores/issues'
+import DefaultApi from '@/api/default'
+import logger from '@/helpers/logger'
+import CardPrimary from "@/components/common/CardPrimary.vue"
 
+const coreStore = useCoreStore()
+const issueStore = useIssueStore()
+const router = useRouter()
+let state = reactive({
+  details: {},
+  comments: []
+})
+
+const isEmptyComments = computed(() => {
+  return state.comments.length === 0
+})
+
+const getDetails = async () => {
+  const url = issueStore.selected.details_url
+  return await DefaultApi.get(url)
+}
+
+const getComments = async () => {
+  const url = issueStore.selected.comments_url
+  return await DefaultApi.get(url)
+}
+
+onBeforeUnmount(() => {
+  coreStore.resetBreadcrumbs()
+})
+
+onMounted(async () => {
+  try {
+    coreStore.setLoading(true)
+    const [detailsPr, commentsPr] = await Promise.all([getDetails(), getComments()])
+    state.details = detailsPr.data
+    state.comments = commentsPr.data
+    coreStore.setBreadcrumbs(state.details.title, '#')
+  } catch (error) {
+    logger.error(error)
+    router.push('/error?status=404')
+  } finally {
+    coreStore.setLoading(false)
+  }
+}) 
 </script>
 
 <template>
   <div class="issue-details">
     <div class="issue-details__header">
       <span class="issue-details__header__title">
-        test issue
+        {{ state.details.title }}
         <span class="number">
-          #3
+          #{{ state.details.number }}
         </span>
       </span>
       <div class="issue-details__header__details">
@@ -28,14 +75,39 @@
           Open
         </span>
         <span class="issue-details__header_details-date">
-          <!-- <span class="user">
-            ivanreyes30
-          <span> -->
           <span>
-            opened this issue 2 days ago · 2 comments
+            {{ state.details.specific_details_text }}
+          </span>
+          <span class="float-end mt-2">
+            {{ state.details.timestamp }}
           </span>
         </span>
       </div>
+    </div>
+    <div class="issue-details__description">
+      <CardPrimary
+        class="mt-4"
+        empty-placeholder="No description provided."
+        header="Description"
+        :body="state.details.body"
+      />
+    </div>
+    <div
+       v-if="!isEmptyComments"
+      class="issue-details__comments"
+    >
+      <span class="issue-details__header__title my-4 d-block">
+        Comments
+      </span>
+      <CardPrimary
+        v-for="(comment, index) in state.comments"
+        :key="`comment-${index}`"
+        :header="comment.user.login"
+        :header-info="`commented ${comment.created_diff} (${comment.timestamp})`"
+        :body="comment.body"
+        class="mb-4"
+        empty-placeholder="No comments provided."
+      />
     </div>
   </div>
 </template>

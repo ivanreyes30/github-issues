@@ -1,6 +1,8 @@
 <script setup>
+import BadgeLabel from '@/components/common/BadgeLabel.vue'
 import { useRouter } from 'vue-router'
 
+const emit = defineEmits(['selectIssue'])
 const props = defineProps({
   item: Object
 })
@@ -24,18 +26,25 @@ const redirectToDetails = () => {
         </svg>
         <span
           class="git-card__body-list__left__title__text"
-          @click="redirectToDetails"
+          @click="emit('selectIssue', item.number)"
         >
           {{ item.title }}
         </span>
-        <span
+        <BadgeLabel
+          v-for="(label, index) in labels"
+          :key="`label-${index}`"
+          :name="label.name"
+          :color="label.color"
+        />
+        <!-- <span
           v-for="(label, index) in labels"
           :key="`label-${index}`"
           class="git-card__body-list__left__title__badge"
           :style="{'background': `#${label.color}`}"
         >
+        
           {{ label.name }}
-        </span>
+        </span> -->
         <div class="git-card__body-list__left__title__details">
           {{ item.details_text }}
         </div>
@@ -92,6 +101,7 @@ const redirectToDetails = () => {
   font-size: 12px;
   color: #636c76;
   padding-left: 15px;
+  margin-top: 2px;
 }
 
 .git-card__body-list__left__title__badge {

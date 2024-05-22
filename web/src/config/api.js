@@ -1,5 +1,5 @@
 export default {
-  URL: import.meta.url.VITE_API_URL,
-  CLIENT_ID: import.meta.url.VITE_CLIENT_ID,
-  CLIENT_SECRET: import.meta.url.VITE_CLIENT_SECRET
+  URL: import.meta.env.VITE_API_URL,
+  CLIENT_ID: import.meta.env.VITE_CLIENT_ID,
+  CLIENT_SECRET: import.meta.env.VITE_CLIENT_SECRET
 }

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import logger from '@/helpers/logger'
 import AuthApi from '@/api/auth'
 import AuthService from '@/services/auth'
 
@@ -18,6 +19,7 @@ export const useAuthStore = defineStore('auth', {
             resolve(data)
           })
           .catch((error) => {
+            logger.error(error)
             reject(error)
           })
           .finally(() => {

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import CardList from '@/components/issues/CardList.vue'
 
+const emit = defineEmits(['selectIssue'])
 const props = defineProps({
   loading: Boolean,
   issues: Array
@@ -40,6 +41,19 @@ const display = computed(() => {
       </div>
     </div>
     <div class="git-card__body">
+      <!-- <p class="placeholder-glow">
+        <span class="placeholder col-12"></span>
+      </p>
+      <p class="placeholder-glow">
+        <span class="placeholder col-12"></span>
+      </p>
+      <p class="placeholder-glow">
+        <span class="placeholder col-12"></span>
+      </p>
+      <p class="placeholder-glow">
+        <span class="placeholder col-12"></span>
+      </p> -->
+      <!-- v-else -->
       <div
         v-if="isEmpty"
         class="git-card__body__empty"
@@ -50,10 +64,10 @@ const display = computed(() => {
         {{ display }}
       </div>
       <CardList
-        v-else
         v-for="(item, index) in props.issues"
         :item="item"
         :key="`issue-${index}`"
+        @selectIssue="(number) => emit('selectIssue', number)"
       />
     </div>
   </div>

@@ -1,6 +1,10 @@
 export default {
   error (error) {
-    console.log(`Error: ${error?.response?.data?.message}`)
+    let message = error?.message
+
+    if (error?.response !== undefined) message = error?.response?.data?.message
+
+    console.error(`Error: ${message}`)
   },
 
   info (message) {

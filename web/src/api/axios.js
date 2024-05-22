@@ -4,7 +4,7 @@ import ApiConfig from '@/config/api'
 
 export default {
   config: {
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: ApiConfig.URL,
     withCredentials: true
   },
 
@@ -22,8 +22,8 @@ export default {
   async setAuth () {
     this.http()
       .post(`auth/token/client-credentials`, {
-        client_id: import.meta.env.VITE_CLIENT_ID,
-        client_secret: import.meta.env.VITE_CLIENT_SECRET
+        client_id: ApiConfig.CLIENT_ID,
+        client_secret: ApiConfig.CLIENT_SECRET
       })
       .then(() => {
         /**
