@@ -48,8 +48,4 @@ Application for Displaying Assigned GitHub Issues
 
 2. Update the `.env` file with the `VITE_CLIENT_ID` and `VITE_CLIENT_SECRET` values obtained from the API.
 
-3. Execute `npm install` to install dependencies.
-
-4. Run `npm run dev` to start the development server.
-
-5. Access the development server to `http://web.git.dev.com:5173`
+3. Access the development server to `http://web.git.dev.com:5173`

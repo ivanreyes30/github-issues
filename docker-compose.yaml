@@ -9,6 +9,17 @@ services:
     ports:
       - '80:80'
 
+  web:
+    container_name: github-web
+    build:
+      context: .
+      dockerfile: /docker/local/node/Dockerfile
+    volumes:
+      - './web:/web'
+      - 'github-vendor:/web/node_modules'
+    ports:
+      - '5173:5173'
+
   api:
     container_name: github-api
     build:
@@ -31,7 +42,4 @@ services:
 
 volumes:
   github-data:
-
-
-
-  # mysql
+  github-vendor:
